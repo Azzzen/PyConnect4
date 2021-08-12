@@ -9,18 +9,18 @@ cp=pygame.mixer.Sound("ressources/case pleine.wav")
 
 fenetre=pygame.display.set_mode((800,600))
 
-rouge = pygame.image.load("ressources/RedDisc.png")
-rougerect=rouge.get_rect()
-rougerectinit=rouge.get_rect()
+Red = pygame.image.load("ressources/RedDisc.png")
+Redrect=Red.get_rect()
+Redrectinit=Red.get_rect()
 Yellow = pygame.image.load("ressources/YellowDisc.png")
 Yellowrect=Yellow.get_rect()
 Yellowrectinit=Yellow.get_rect()
 fondnoir= pygame.image.load("ressources/fondnoir.png")
-fondecran=pygame.image.load("ressources/fondecran.png")
-rougewin=pygame.image.load("ressources/rougewin.png")
-jaunewin=pygame.image.load("ressources/jaunewin.png")
+background=pygame.image.load("ressources/background.png")
+Redwin=pygame.image.load("ressources/red_wins.png")
+jaunewin=pygame.image.load("ressources/yellow_wins.png")
 menuim= pygame.image.load("ressources/Title_Screen.png")
-yrouge=6
+yRed=6
 
 
 
@@ -45,30 +45,30 @@ def menu():
 
     return commencer,choix
 
-def bougejeton(joueur,x,y,position,rougerect,Yellowrect):
+def bougejeton(joueur,x,y,position,Redrect,Yellowrect):
     global taby,tabx
     if joueur==1 :
-        rougerect=rougerect.move(x,y)
-        fenetre.blit(rouge,rougerect)
+        Redrect=Redrect.move(x,y)
+        fenetre.blit(Red,Redrect)
         pygame.display.flip()
-        salejetonr=fondecran.subsurface(rougerect)
+        salejetonr=background.subsurface(Redrect)
         for i in range(taby[position]):
-            fenetre.blit(salejetonr, rougerect)
-            rougerect=rougerect.move(0,1)
-            fenetre.blit(rouge,rougerect)
+            fenetre.blit(salejetonr, Redrect)
+            Redrect=Redrect.move(0,1)
+            fenetre.blit(Red,Redrect)
             pygame.display.flip()
-            salejetonr=fondecran.subsurface(rougerect)
+            salejetonr=background.subsurface(Redrect)
     if joueur==2 :
         Yellowrect=Yellowrect.move(x,y)
         fenetre.blit(Yellow,Yellowrect)
         pygame.display.flip()
-        salejetonr=fondecran.subsurface(Yellowrect)
+        salejetonr=background.subsurface(Yellowrect)
         for i in range(taby[position]):
             fenetre.blit(salejetonr, Yellowrect)
             Yellowrect=Yellowrect.move(0,1)
             fenetre.blit(Yellow,Yellowrect)
             pygame.display.flip()
-            salejetonr=fondecran.subsurface(Yellowrect)
+            salejetonr=background.subsurface(Yellowrect)
 
 def test(col,couleur):
     li=5
@@ -114,7 +114,7 @@ def verif(grille,couleur):
     return good
 
 
-def tombejeton(joueur,grille):              # joueur 1 --> rouge / 2--> Yellow
+def tombejeton(joueur,grille):              # joueur 1 --> Red / 2--> Yellow
         ok=False
         cont=True
         for event in pygame.event.get():
@@ -123,7 +123,7 @@ def tombejeton(joueur,grille):              # joueur 1 --> rouge / 2--> Yellow
             if event.type==MOUSEBUTTONUP and event.button==1:
                 print ("clic effectué")
                 if event.pos[1]<479:
-                    rougerect=rougerectinit
+                    Redrect=Redrectinit
                     Yellowrect=Yellowrectinit
 
             #première colonne
@@ -132,7 +132,7 @@ def tombejeton(joueur,grille):              # joueur 1 --> rouge / 2--> Yellow
                     if position>-1:
                         grille[0][position]=joueur
                         ok=True
-                        bougejeton(joueur,58, 107,position,rougerect,Yellowrect)
+                        bougejeton(joueur,58, 107,position,Redrect,Yellowrect)
                         print(grille)
 
             #deuxième colonne
@@ -142,7 +142,7 @@ def tombejeton(joueur,grille):              # joueur 1 --> rouge / 2--> Yellow
                     if position>-1:
                         grille[1][position]=joueur
                         ok=True
-                        bougejeton(joueur,158, 107,position,rougerect,Yellowrect)
+                        bougejeton(joueur,158, 107,position,Redrect,Yellowrect)
                         print(grille)
 
             #troisième colonne
@@ -152,7 +152,7 @@ def tombejeton(joueur,grille):              # joueur 1 --> rouge / 2--> Yellow
                     if position>-1:
                         grille[2][position]=joueur
                         ok=True
-                        bougejeton(joueur,257, 107,position,rougerect,Yellowrect)
+                        bougejeton(joueur,257, 107,position,Redrect,Yellowrect)
                         print(grille)
 
             #quatrième colonne
@@ -162,7 +162,7 @@ def tombejeton(joueur,grille):              # joueur 1 --> rouge / 2--> Yellow
                     if position>-1:
                         grille[3][position]=joueur
                         ok=True
-                        bougejeton(joueur,359, 107,position,rougerect,Yellowrect)
+                        bougejeton(joueur,359, 107,position,Redrect,Yellowrect)
                         print(grille)
 
             #cinquième colonne
@@ -172,7 +172,7 @@ def tombejeton(joueur,grille):              # joueur 1 --> rouge / 2--> Yellow
                     if position>-1:
                         grille[4][position]=joueur
                         ok=True
-                        bougejeton(joueur,458, 107,position,rougerect,Yellowrect)
+                        bougejeton(joueur,458, 107,position,Redrect,Yellowrect)
                         print(grille)
 
             #sixième colonne
@@ -182,7 +182,7 @@ def tombejeton(joueur,grille):              # joueur 1 --> rouge / 2--> Yellow
                     if position>-1:
                         grille[5][position]=joueur
                         ok=True
-                        bougejeton(joueur,558,107,position,rougerect,Yellowrect)
+                        bougejeton(joueur,558,107,position,Redrect,Yellowrect)
                         print(grille)
 
             #septième colonne
@@ -192,7 +192,7 @@ def tombejeton(joueur,grille):              # joueur 1 --> rouge / 2--> Yellow
                     if position>-1:
                         grille[6][position]=joueur
                         ok=True
-                        bougejeton(joueur,65, 107,position,rougerect,Yellowrect)
+                        bougejeton(joueur,65, 107,position,Redrect,Yellowrect)
                         print(grille)
 
         ##        cp.play()
@@ -206,7 +206,7 @@ commencer,choix=menu()
 #if commencer==False and choix==2:
 
 if commencer==True and choix==1:
-    fenetre.blit(fondecran, (0,0))
+    fenetre.blit(background, (0,0))
     pygame.display.flip()
     grille=[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]
     jouer=False
@@ -217,19 +217,15 @@ if commencer==True and choix==1:
             continuer,bon=tombejeton(joueur,grille)
             if verif(grille,joueur)==True:
                 if joueur==1:
-                    fenetre.blit(rougewin, (150,30))
+                    fenetre.blit(Redwin, (300,250))
                     pygame.display.flip()
-                    print("rouge")
                 if joueur==2:
-                    fenetre.blit(jaunewin, (150,30))
+                    fenetre.blit(jaunewin, (300,250))
                     pygame.display.flip()
-                    print("jaune")
 
             if bon :
                 if joueur==1: joueur=2
                 else : joueur=1
-
-
             jouer=True
 
 pygame.quit()
